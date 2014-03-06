@@ -41,7 +41,8 @@ public class Equipo implements Serializable {
 	}
 	
 	//Método para poner los goles a favor
-	public void setGolesFavor(int golesFavor) {		
+	public void setGolesFavor(int gFavor) {	
+		golesFavor=gFavor;
 	}
 	
 	//Método para recuperar los goles a favor
@@ -50,7 +51,8 @@ public class Equipo implements Serializable {
 	}
 	
 	//Método para poner los goles en contra
-	public void setGolesContra(int golesEnContra) {		
+	public void setGolesContra(int gContra) {
+		golesEnContra=gContra;
 	}
 	
 	//Método para recuperar los goles en contra
@@ -59,7 +61,8 @@ public class Equipo implements Serializable {
 	}
 	
 	//Método para estableces los partidos ganados
-	public void setPartidosGanados(int partidosGanados) {
+	public void setPartidosGanados(int ganados) {
+		partidosGanados=ganados;
 	}
 	
 	//Método para recuperar los partidos ganados
@@ -68,7 +71,8 @@ public class Equipo implements Serializable {
 	}
 	
 	//Método para estableces los partidos perdidos
-	public void setPartidosPerdidos(int partidosPerdidos) {
+	public void setPartidosPerdidos(int perdidos) {
+		partidosPerdidos=perdidos;
 	}
 	
 	//Método para recuperar los partidos perdidos

@@ -3,11 +3,12 @@ public class Principal {
 
 	public static void main(String[] args) {
 		
-			Equipo equipo=new Equipo(); //Creación de objeto equipo
-		
+			//Creación de objeto Liga			
+			Liga liga=new Liga();
+			
 			//Lanzador de la ventana
-			VentanaEquipo frame = new VentanaEquipo(equipo);
-			frame.setVisible(true);						
+			VentanaLiga frame = new VentanaLiga(liga);
+			frame.setVisible(true);
 	}
 
 }

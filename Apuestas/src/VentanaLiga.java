@@ -60,13 +60,15 @@ public class VentanaLiga extends JFrame {
 		textoNumero.setBounds(203, 36, 96, 20);
 		contentPane.add(textoNumero);
 		textoNumero.setColumns(10);
+		textoNumero.setText(String.valueOf(liga.getNumEquipos()));
 		
 		JButton btnModificar = new JButton("Modificar");
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaEquipo frame = new VentanaEquipo(equipo);
-				frame.setVisible(true);
-				frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+				//Crea y muestra la ventana para crear un equipo
+				VentanaEquipo frameEquipo = new VentanaEquipo(liga.getEquipo(Integer.valueOf(textoModificar.getText())));
+				frameEquipo.setVisible(true);
+				frameEquipo.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			}
 		});
 		btnModificar.setBounds(21, 143, 89, 23);

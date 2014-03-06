@@ -32,22 +32,27 @@ public class Liga implements Serializable {
 		}
 	}
 	
+	//Método para poner nombre a la liga
 	public void setNombreLiga(String nombre) {	
 		nombreLiga=nombre;
 	}
-
+	
+	//Método para obetener el noombre puesto a la liga
 	public String getNombreLiga() {
 		return nombreLiga;	
 	}
 	
+	//Método para obtener el número de equipos
 	public int getNumEquipos() {
 		return numEquipos;
 	}
 	
+	//Método para obtener la posición del equipo
 	public Equipo getEquipo(int posicion) {
 		return equipos[posicion];	
 	}
 	
+	//Método para establecer un equipo en una posición determinada
 	public void setEquipo(Equipo equipo, int posicion) {
 		equipo=new Equipo();
 		equipo=equipos[posicion];

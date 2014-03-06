@@ -35,7 +35,7 @@ public class VentanaEquipo extends JFrame {
 		equipo=equipoAModificar;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 438, 336);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -58,31 +58,31 @@ public class VentanaEquipo extends JFrame {
 		contentPane.add(etiqPartidosG);
 		
 		JLabel etiqPartidosP = new JLabel("Partidos perdidos");
-		etiqPartidosP.setBounds(10, 190, 92, 14);
+		etiqPartidosP.setBounds(10, 190, 121, 14);
 		contentPane.add(etiqPartidosP);
 		
 		textoNombre = new JTextField();
-		textoNombre.setBounds(114, 27, 121, 20);
+		textoNombre.setBounds(143, 27, 121, 20);
 		contentPane.add(textoNombre);
 		textoNombre.setColumns(10);
 		
 		textoGolesF = new JTextField();
-		textoGolesF.setBounds(112, 67, 123, 20);
+		textoGolesF.setBounds(141, 67, 123, 20);
 		contentPane.add(textoGolesF);
 		textoGolesF.setColumns(10);
 		
 		textoGolesC = new JTextField();
-		textoGolesC.setBounds(112, 106, 123, 20);
+		textoGolesC.setBounds(141, 106, 123, 20);
 		contentPane.add(textoGolesC);
 		textoGolesC.setColumns(10);
 		
 		textoPartidosG = new JTextField();
-		textoPartidosG.setBounds(112, 146, 123, 20);
+		textoPartidosG.setBounds(141, 146, 123, 20);
 		contentPane.add(textoPartidosG);
 		textoPartidosG.setColumns(10);
 		
 		textoPartidosP = new JTextField();
-		textoPartidosP.setBounds(112, 187, 123, 20);
+		textoPartidosP.setBounds(141, 187, 123, 20);
 		contentPane.add(textoPartidosP);
 		textoPartidosP.setColumns(10);
 		
@@ -100,13 +100,15 @@ public class VentanaEquipo extends JFrame {
 				guardarEnFichero();			
 			}
 		});
-		btnGuardar.setBounds(10, 228, 155, 23);
+		btnGuardar.setBounds(10, 254, 155, 23);
 		contentPane.add(btnGuardar);
 		
 		JButton btnLeerDatos = new JButton("Leer Datos");
 		btnLeerDatos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//Llamada al método leerFichero
 				leerFichero();
+				//Introducimos los datos del fichero leido en los campos de texto
 				textoNombre.setText(equipo.getNombre());
 				textoGolesF.setText(String.valueOf(equipo.getGolesFavor()));
 				textoGolesC.setText(String.valueOf(equipo.getGolesContra()));
@@ -114,8 +116,18 @@ public class VentanaEquipo extends JFrame {
 				textoPartidosP.setText(String.valueOf(equipo.getPartidosPerdidos()));				
 			}
 		});
-		btnLeerDatos.setBounds(247, 228, 163, 23);
+		btnLeerDatos.setBounds(244, 254, 163, 23);
 		contentPane.add(btnLeerDatos);
+		
+		JButton btnSave = new JButton("Guardar");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Llamada al método guardarEquipo
+				guardarEquipo();
+			}
+		});
+		btnSave.setBounds(295, 29, 92, 55);
+		contentPane.add(btnSave);
 		
 	}
 	
@@ -146,5 +158,14 @@ public class VentanaEquipo extends JFrame {
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	//Método para guardar datos introducidos en equipo
+	private void guardarEquipo() {
+		equipo.setNombre(textoNombre.getText());
+		equipo.setGolesFavor(Integer.valueOf(textoGolesF.getText()));
+		equipo.setGolesContra(Integer.valueOf(textoGolesC.getText()));
+		equipo.setPartidosGanados(Integer.valueOf(textoPartidosG.getText()));
+		equipo.setPartidosPerdidos(Integer.valueOf(textoPartidosP.getText()));
 	}
 }

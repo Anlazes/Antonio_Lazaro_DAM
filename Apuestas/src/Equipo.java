@@ -32,7 +32,8 @@ public class Equipo implements Serializable {
 	}
 	
 	//Método para poner nombre al equipo
-	public void setNombre(String nombreEquipo) {
+	public void setNombre(String nombre) {
+		nombreEquipo=nombre;
 	}
 	
 	//Método para recuperar el nombre del equipo

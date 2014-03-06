@@ -5,8 +5,10 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import javax.swing.JLabel;
@@ -24,6 +26,7 @@ public class VentanaEquipo extends JFrame {
 	private JTextField textoPartidosG;
 	private JTextField textoPartidosP;
 	private ObjectOutputStream salida;
+	private ObjectInputStream entrada;
 
 	//Constructor VentanaEquipo
 	public VentanaEquipo(Equipo equipoAModificar) {
@@ -83,7 +86,7 @@ public class VentanaEquipo extends JFrame {
 		contentPane.add(textoPartidosP);
 		textoPartidosP.setColumns(10);
 		
-		JButton btnGuardar = new JButton("Guardar Equipo");
+		JButton btnGuardar = new JButton("Guardar Datos");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//Recogemos los datos introducidos en los campos de texto y se lo pasamos al objeto equipo
@@ -97,8 +100,22 @@ public class VentanaEquipo extends JFrame {
 				guardarEnFichero();			
 			}
 		});
-		btnGuardar.setBounds(122, 228, 155, 23);
+		btnGuardar.setBounds(10, 228, 155, 23);
 		contentPane.add(btnGuardar);
+		
+		JButton btnLeerDatos = new JButton("Leer Datos");
+		btnLeerDatos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				leerFichero();
+				textoNombre.setText(equipo.getNombre());
+				textoGolesF.setText(String.valueOf(equipo.getGolesFavor()));
+				textoGolesC.setText(String.valueOf(equipo.getGolesContra()));
+				textoPartidosG.setText(String.valueOf(equipo.getPartidosGanados()));
+				textoPartidosP.setText(String.valueOf(equipo.getPartidosPerdidos()));				
+			}
+		});
+		btnLeerDatos.setBounds(247, 228, 163, 23);
+		contentPane.add(btnLeerDatos);
 		
 	}
 	
@@ -107,10 +124,27 @@ public class VentanaEquipo extends JFrame {
 		try {	//Abre el archivo
 			salida = new ObjectOutputStream(new FileOutputStream("equipo.ser"));
 			salida.writeObject(equipo); //Envía el registro como salida
+			textoNombre.setText("");
+			textoGolesC.setText("");
+			textoGolesF.setText("");
+			textoPartidosG.setText("");
+			textoPartidosP.setText("");
 			if (salida != null)
 				salida.close();
-		} catch (IOException ioEscepction) {
+		} catch (IOException ioExcepction) {
 			System.err.println("Error al abrir el archivo");		
+		}
+	}
+	
+	//Método para recuperar los datos guardados en fichero
+	private void leerFichero() {
+		try {
+			entrada = new ObjectInputStream(new FileInputStream("equipo.ser"));
+			equipo=(Equipo)entrada.readObject();
+			if (entrada != null)
+				entrada.close();
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

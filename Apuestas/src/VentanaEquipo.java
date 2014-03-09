@@ -107,7 +107,7 @@ public class VentanaEquipo extends JFrame {
 		btnLeerDatos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//Llamada al método leerFichero
-				leerFichero();
+				recuperarFichero();
 				//Introducimos los datos del fichero leido en los campos de texto
 				textoNombre.setText(equipo.getNombre());
 				textoGolesF.setText(String.valueOf(equipo.getGolesFavor()));
@@ -129,6 +129,8 @@ public class VentanaEquipo extends JFrame {
 		btnSave.setBounds(295, 29, 92, 55);
 		contentPane.add(btnSave);
 		
+		//Llamada al método leerEquipo para que aparezca en los campos de texto el equipo que vamos a modificar del array
+		leerEquipo();
 	}
 	
 	//Método para guardar en fichero
@@ -149,7 +151,7 @@ public class VentanaEquipo extends JFrame {
 	}
 	
 	//Método para recuperar los datos guardados en fichero
-	private void leerFichero() {
+	private void recuperarFichero() {
 		try {
 			entrada = new ObjectInputStream(new FileInputStream("equipo.ser"));
 			equipo=(Equipo)entrada.readObject();
@@ -168,4 +170,14 @@ public class VentanaEquipo extends JFrame {
 		equipo.setPartidosGanados(Integer.valueOf(textoPartidosG.getText()));
 		equipo.setPartidosPerdidos(Integer.valueOf(textoPartidosP.getText()));
 	}
+	
+	private void leerEquipo() {
+		textoNombre.setText(equipo.getNombre());
+		textoGolesF.setText(String.valueOf(equipo.getGolesFavor()));
+		textoGolesC.setText(String.valueOf(equipo.getGolesContra()));
+		textoPartidosG.setText(String.valueOf(equipo.getPartidosGanados()));
+		textoPartidosP.setText(String.valueOf(equipo.getPartidosPerdidos()));
+	}
+	
 }
+

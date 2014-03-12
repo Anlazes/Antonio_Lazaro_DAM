@@ -171,6 +171,7 @@ public class VentanaEquipo extends JFrame {
 		equipo.setPartidosPerdidos(Integer.valueOf(textoPartidosP.getText()));
 	}
 	
+	//Método para poner equipo a modificar del array en los campos de texto
 	private void leerEquipo() {
 		textoNombre.setText(equipo.getNombre());
 		textoGolesF.setText(String.valueOf(equipo.getGolesFavor()));

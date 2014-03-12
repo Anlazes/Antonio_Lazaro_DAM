@@ -73,5 +73,8 @@ public class VentanaLiga extends JFrame {
 		});
 		btnModificar.setBounds(21, 143, 89, 23);
 		contentPane.add(btnModificar);
+		
+		//Ponemos el nombre de la liga creada en el campo de texto
+		textoNombreLiga.setText(liga.getNombreLiga());
 	}
 }

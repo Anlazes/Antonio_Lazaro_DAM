@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 
 
 public class Liga implements Serializable {
@@ -6,7 +7,7 @@ public class Liga implements Serializable {
 	//Atributos de clase Liga
 	private int numEquipos;
 	private String nombreLiga;
-	private Equipo equipos[];
+	private ArrayList<Equipo> equipos=new ArrayList<Equipo>();
 
 	//Constructor de la clase Liga
 	public Liga() {
@@ -14,9 +15,9 @@ public class Liga implements Serializable {
 		//Inicialización de los atributos
 		numEquipos=20;
 		nombreLiga="Liga BBVA";
-		equipos=new Equipo[numEquipos];
+		equipos.ensureCapacity(numEquipos);
 		for(int i=0;i<numEquipos;i++) {
-			equipos[i]=new Equipo();
+			equipos.add(new Equipo());
 		}
 	}
 	
@@ -26,9 +27,9 @@ public class Liga implements Serializable {
 		//Inicialización de atributos
 		numEquipos=numeroE;
 		nombreLiga=nombreL;
-		equipos=new Equipo[numEquipos];
+		equipos.ensureCapacity(numEquipos);
 		for(int i=0;i<numEquipos;i++) {
-			equipos[i]=new Equipo();
+			equipos.add(new Equipo());
 		}
 	}
 	
@@ -49,13 +50,13 @@ public class Liga implements Serializable {
 	
 	//Método para obtener la posición del equipo
 	public Equipo getEquipo(int posicion) {
-		return equipos[posicion];	
+		return equipos.get(posicion);
 	}
 	
 	//Método para establecer un equipo en una posición determinada
 	public void setEquipo(Equipo equipo, int posicion) {
 		equipo=new Equipo();
-		equipo=equipos[posicion];
+		equipos.add(posicion, equipo);
 		
 	}
 }

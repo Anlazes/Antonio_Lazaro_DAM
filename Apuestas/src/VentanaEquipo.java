@@ -1,3 +1,4 @@
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -27,12 +28,18 @@ public class VentanaEquipo extends JFrame {
 	private JTextField textoPartidosP;
 	private ObjectOutputStream salida;
 	private ObjectInputStream entrada;
+	private JComboBox<Equipo> comboBox;
+	private boolean modifica;
 
 	//Constructor VentanaEquipo
-	public VentanaEquipo(Equipo equipoAModificar) {
+	public VentanaEquipo(Equipo equipoAModificar, JComboBox comboBox, boolean modifica) {
 		
 		//Asignación equipo
 		equipo=equipoAModificar;
+		
+		this.comboBox=comboBox;
+		this.modifica=modifica;
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 438, 336);
@@ -113,7 +120,7 @@ public class VentanaEquipo extends JFrame {
 				textoGolesF.setText(String.valueOf(equipo.getGolesFavor()));
 				textoGolesC.setText(String.valueOf(equipo.getGolesContra()));
 				textoPartidosG.setText(String.valueOf(equipo.getPartidosGanados()));
-				textoPartidosP.setText(String.valueOf(equipo.getPartidosPerdidos()));				
+				textoPartidosP.setText(String.valueOf(equipo.getPartidosPerdidos()));		
 			}
 		});
 		btnLeerDatos.setBounds(244, 254, 163, 23);
@@ -169,6 +176,15 @@ public class VentanaEquipo extends JFrame {
 		equipo.setGolesContra(Integer.valueOf(textoGolesC.getText()));
 		equipo.setPartidosGanados(Integer.valueOf(textoPartidosG.getText()));
 		equipo.setPartidosPerdidos(Integer.valueOf(textoPartidosP.getText()));
+		
+		//Instrucción para que añada equipo si no es una modificación
+		if(!modifica) {
+			comboBox.addItem(equipo);
+		//Sino cambia el nombre del equipo	
+		}else{
+			Equipo equipoElegido=(Equipo)comboBox.getSelectedItem();
+			equipoElegido.setNombre(equipo.getNombre());
+		}
 	}
 	
 	//Método para poner equipo a modificar del array en los campos de texto

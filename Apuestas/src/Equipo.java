@@ -80,4 +80,9 @@ public class Equipo implements Serializable {
 	public int getPartidosPerdidos() {
 		return partidosPerdidos;
 	}
+	
+	//Método para que comboBox lea el nombre del equipo
+	public String toString(){
+		return nombreEquipo;
+	}
 }

@@ -56,7 +56,18 @@ public class Liga implements Serializable {
 	//Método para establecer un equipo en una posición determinada
 	public void setEquipo(Equipo equipo, int posicion) {
 		equipo=new Equipo();
-		equipos.add(posicion, equipo);
-		
+		equipos.add(posicion, equipo);		
 	}
+	
+	//Método para quitar un equipo
+	public void quitarEquipo(int posicion) {
+		equipos.remove(posicion);
+	}	
+		
+	//Método para añadir un equipo
+	public void anyadirEquipo() {
+		equipos.add(new Equipo());
+		numEquipos++;
+	}
+
 }

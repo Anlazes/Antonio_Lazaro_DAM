@@ -7,6 +7,7 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 
 public class VentanaLiga extends JFrame {
@@ -16,8 +17,8 @@ public class VentanaLiga extends JFrame {
 	private Liga liga;
 	private JPanel contentPane;
 	private JTextField textoNombreLiga;
-	private JTextField textoModificar;
 	private JTextField textoNumero;
+	private JComboBox<Equipo> comboBox;
 
 
 	//Constructor de la ventana
@@ -42,14 +43,9 @@ public class VentanaLiga extends JFrame {
 		contentPane.add(textoNombreLiga);
 		textoNombreLiga.setColumns(10);
 		
-		JLabel etiqModificar = new JLabel("Equipo a modificar");
-		etiqModificar.setBounds(21, 70, 107, 14);
+		JLabel etiqModificar = new JLabel("Equipos");
+		etiqModificar.setBounds(21, 76, 107, 14);
 		contentPane.add(etiqModificar);
-		
-		textoModificar = new JTextField();
-		textoModificar.setBounds(21, 95, 128, 20);
-		contentPane.add(textoModificar);
-		textoModificar.setColumns(10);
 		
 		JLabel etiqNumero = new JLabel("N\u00FAmero de equipos");
 		etiqNumero.setBounds(203, 11, 128, 14);
@@ -62,19 +58,55 @@ public class VentanaLiga extends JFrame {
 		textoNumero.setColumns(10);
 		textoNumero.setText(String.valueOf(liga.getNumEquipos()));
 		
+		//Botón para modificar un equipo de la liga
 		JButton btnModificar = new JButton("Modificar");
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//Crea y muestra la ventana para crear un equipo
-				VentanaEquipo frameEquipo = new VentanaEquipo(liga.getEquipo(Integer.valueOf(textoModificar.getText())));
-				frameEquipo.setVisible(true);
-				frameEquipo.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+				//Llama al método para abrir la ventana Equipo para modificar
+				abrirVentanaEquipo((Equipo) comboBox.getSelectedItem(),true);
 			}
 		});
-		btnModificar.setBounds(21, 143, 89, 23);
+		btnModificar.setBounds(210, 140, 89, 23);
 		contentPane.add(btnModificar);
 		
 		//Ponemos el nombre de la liga creada en el campo de texto
 		textoNombreLiga.setText(liga.getNombreLiga());
+		
+		comboBox = new JComboBox<Equipo>();
+		comboBox.setBounds(21, 101, 181, 20);
+		contentPane.add(comboBox);
+		
+		//Botón para añadir un equipo a la liga
+		JButton btnAnyadir = new JButton("+");
+		btnAnyadir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//Llama al método para añadir un equipo al arrayList
+				liga.anyadirEquipo();
+				//Llama al método para abrir la ventana Equipo para añadir un equipo
+				abrirVentanaEquipo(liga.getEquipo(liga.getNumEquipos()-1), false);
+			}
+		});
+		btnAnyadir.setBounds(21, 140, 48, 23);
+		contentPane.add(btnAnyadir);
+		
+		//Botón para quitar un equipo de la liga
+		JButton btnQuitar = new JButton("-");
+		btnQuitar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Llamada al método para eliminar un equipo en la posición seleccionada en comboBox
+				liga.quitarEquipo(comboBox.getSelectedIndex());
+				//Eliminamos del comboBox el item seleccionado
+				comboBox.removeItem((Equipo)comboBox.getSelectedItem());
+			}
+		});
+		btnQuitar.setBounds(91, 140, 48, 23);
+		contentPane.add(btnQuitar);
+	}
+	
+	//Método para abrir la ventana Equipo
+	public void abrirVentanaEquipo(Equipo equipo, boolean modifica) {
+		VentanaEquipo frameEquipo=new VentanaEquipo(equipo, this.comboBox,modifica);
+		frameEquipo.setVisible(true);
+		frameEquipo.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 }

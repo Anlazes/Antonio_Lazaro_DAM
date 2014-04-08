@@ -6,6 +6,7 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.font.NumericShaper;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -131,6 +132,7 @@ public class VentanaEquipo extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//Llamada al método guardarEquipo
 				guardarEquipo();
+				
 			}
 		});
 		btnSave.setBounds(295, 29, 92, 55);

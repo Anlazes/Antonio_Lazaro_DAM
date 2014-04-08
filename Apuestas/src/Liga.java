@@ -7,31 +7,35 @@ public class Liga implements Serializable {
 	//Atributos de clase Liga
 	private int numEquipos;
 	private String nombreLiga;
-	private ArrayList<Equipo> equipos=new ArrayList<Equipo>();
+	private ArrayList<Equipo> equipos;
 
 	//Constructor de la clase Liga
 	public Liga() {
 		
 		//Inicialización de los atributos
-		numEquipos=20;
+		numEquipos=0;
 		nombreLiga="Liga BBVA";
+		equipos=new ArrayList<Equipo>();
+		equipos.ensureCapacity(numEquipos);
+		for(int i=0;i<numEquipos;i++) {
+			equipos.add(new Equipo());
+		}
+		
+	}
+	
+	//Constructor de la clase Liga con atributos
+	public Liga(String nombreL) {
+		
+		//Inicialización de atributos
+		nombreLiga=nombreL;
+		numEquipos=0;
+		equipos=new ArrayList<Equipo>();
 		equipos.ensureCapacity(numEquipos);
 		for(int i=0;i<numEquipos;i++) {
 			equipos.add(new Equipo());
 		}
 	}
 	
-	//Constructor de la clase Liga con atributos
-	public Liga(int numeroE, String nombreL) {
-		
-		//Inicialización de atributos
-		numEquipos=numeroE;
-		nombreLiga=nombreL;
-		equipos.ensureCapacity(numEquipos);
-		for(int i=0;i<numEquipos;i++) {
-			equipos.add(new Equipo());
-		}
-	}
 	
 	//Método para poner nombre a la liga
 	public void setNombreLiga(String nombre) {	
@@ -66,8 +70,9 @@ public class Liga implements Serializable {
 		
 	//Método para añadir un equipo
 	public void anyadirEquipo() {
-		equipos.add(new Equipo());
 		numEquipos++;
+		equipos.add(new Equipo());
+		
 	}
 
 }

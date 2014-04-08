@@ -21,11 +21,14 @@ public class VentanaLiga extends JFrame {
 	private JComboBox<Equipo> comboBox;
 
 
+
 	//Constructor de la ventana
 	public VentanaLiga(Liga ligaModificar) {
 		
 		//Asignación de liga
 		liga=ligaModificar;
+		
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 345, 223);
@@ -84,6 +87,7 @@ public class VentanaLiga extends JFrame {
 				liga.anyadirEquipo();
 				//Llama al método para abrir la ventana Equipo para añadir un equipo
 				abrirVentanaEquipo(liga.getEquipo(liga.getNumEquipos()-1), false);
+				
 			}
 		});
 		btnAnyadir.setBounds(21, 140, 48, 23);

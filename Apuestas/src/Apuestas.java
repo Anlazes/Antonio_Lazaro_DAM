@@ -93,7 +93,7 @@ public class Apuestas extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				//Llamada al método para abrir la ventana Liga
-				abrirVentanaLiga(liga = new Liga(textoNombreLiga.getText())); 
+				abrirVentanaLiga(liga=new Liga(conexion, textoNombreLiga.getText())); 
 	
 			}
 		});

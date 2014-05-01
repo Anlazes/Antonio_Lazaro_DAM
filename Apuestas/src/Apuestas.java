@@ -19,8 +19,12 @@ import java.awt.SystemColor;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 
 public class Apuestas extends JFrame {
@@ -29,10 +33,10 @@ public class Apuestas extends JFrame {
 	private JTextField textoNombreLiga;
 	private Liga liga;
 
+	//Base de datos
+	Connection conexion = null; //maneja la conexión a la base de datos
+	
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		
 		//Lanzador de la ventana principal
@@ -48,10 +52,19 @@ public class Apuestas extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Apuestas() {
+		
+		//Conexión a la base de datos
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			//establece la conexión a la base de datos
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/apuestas","root","");
+		} catch (SQLException sqlexcep) {
+			sqlexcep.printStackTrace();		
+		} catch (ClassNotFoundException e) {			
+				e.printStackTrace(); } 
+	
+		
 		setTitle("Administrador de Apuestas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 366, 300);

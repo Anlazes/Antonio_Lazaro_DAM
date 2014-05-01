@@ -1,5 +1,8 @@
 import java.io.Serializable;
+import java.sql.Connection;
 import java.util.ArrayList;
+
+
 
 
 public class Liga implements Serializable {
@@ -8,29 +11,31 @@ public class Liga implements Serializable {
 	private int numEquipos;
 	private String nombreLiga;
 	private ArrayList<Equipo> equipos;
+	
+	//Base de datos
+	private Connection conexion = null; //maneja la conexión a la base de datos
 
 	//Constructor de la clase Liga
-	public Liga() {
+	public Liga(Connection conexion) {
 		
 		//Inicialización de los atributos
 		numEquipos=0;
 		nombreLiga="Liga BBVA";
-		equipos=new ArrayList<Equipo>();
-		equipos.ensureCapacity(numEquipos);
-		for(int i=0;i<numEquipos;i++) {
-			equipos.add(new Equipo());
-		}
-		
+		this.conexion=conexion;	
+		//equipos.ensureCapacity(numEquipos);
+		//for(int i=0;i<numEquipos;i++) {
+			//equipos.add(new Equipo());
+		//}
 	}
 	
 	//Constructor de la clase Liga con atributos
-	public Liga(String nombreL) {
+	public Liga(Connection conexion, String nombreL) {
 		
 		//Inicialización de atributos
 		nombreLiga=nombreL;
 		numEquipos=0;
-		equipos=new ArrayList<Equipo>();
-		equipos.ensureCapacity(numEquipos);
+		this.conexion=conexion;
+		//equipos.ensureCapacity(numEquipos);
 		for(int i=0;i<numEquipos;i++) {
 			equipos.add(new Equipo());
 		}

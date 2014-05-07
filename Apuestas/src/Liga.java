@@ -1,6 +1,11 @@
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import com.mysql.jdbc.Statement;
 
 
 
@@ -14,12 +19,14 @@ public class Liga implements Serializable {
 	
 	//Base de datos
 	private Connection conexion = null; //maneja la conexión a la base de datos
+	private Statement instruccion = null; //instrucción de consulta
+	private ResultSet conjuntoResultados = null; //maneja los resultados
 
 	//Constructor de la clase Liga
 	public Liga(Connection conexion) {
 		
 		//Inicialización de los atributos
-		numEquipos=0;
+		numEquipos=20;
 		nombreLiga="Liga BBVA";
 		this.conexion=conexion;	
 		//equipos.ensureCapacity(numEquipos);
@@ -79,5 +86,22 @@ public class Liga implements Serializable {
 		equipos.add(new Equipo());
 		
 	}
-
+	
+	//Método para leer liga desde DB
+	public void leerLiga() {
+		try {
+		//consulta base de datos
+		instruccion = (Statement) conexion.createStatement();
+		conjuntoResultados = instruccion.executeQuery("SELECT idLiga,nombre,numEquipos FROM ligas LIMIT 1");
+		conjuntoResultados.next();
+		//almacena liga
+		this.nombreLiga=(String)conjuntoResultados.getObject("nombre");
+		this.numEquipos=(int)conjuntoResultados.getObject("numEquipos");
+		
+		} catch (SQLException exc) {
+		exc.printStackTrace();
+		}
+		
+   }
+	
 }

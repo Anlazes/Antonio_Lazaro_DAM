@@ -7,6 +7,10 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import javax.swing.JComboBox;
 
 
@@ -19,11 +23,22 @@ public class VentanaLiga extends JFrame {
 	private JTextField textoNombreLiga;
 	private JTextField textoNumero;
 	private JComboBox<Equipo> comboBox;
+	private Connection conexion = null; //maneja la conexión a la base de datos
 
 
 
 	//Constructor de la ventana
 	public VentanaLiga(Liga ligaModificar) {
+		
+		//Conexión a la base de datos
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			//establece la conexión a la base de datos
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/apuestas","root","");
+		} catch (SQLException sqlexcep) {
+			sqlexcep.printStackTrace();		
+		} catch (ClassNotFoundException e) {			
+				e.printStackTrace(); } 
 		
 		//Asignación de liga
 		liga=ligaModificar;

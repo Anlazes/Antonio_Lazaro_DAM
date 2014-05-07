@@ -12,6 +12,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -31,9 +34,20 @@ public class VentanaEquipo extends JFrame {
 	private ObjectInputStream entrada;
 	private JComboBox<Equipo> comboBox;
 	private boolean modifica;
+	private Connection conexion = null; //maneja la conexión a la base de datos
 
 	//Constructor VentanaEquipo
 	public VentanaEquipo(Equipo equipoAModificar, JComboBox comboBox, boolean modifica) {
+		
+		//Conexión a la base de datos
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			//establece la conexión a la base de datos
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/apuestas","root","");
+		} catch (SQLException sqlexcep) {
+			sqlexcep.printStackTrace();		
+		} catch (ClassNotFoundException e) {			
+				e.printStackTrace(); } 
 		
 		//Asignación equipo
 		equipo=equipoAModificar;

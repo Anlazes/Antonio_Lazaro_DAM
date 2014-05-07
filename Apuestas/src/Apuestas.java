@@ -66,6 +66,8 @@ public class Apuestas extends JFrame {
 		
 		//Creación objeto Liga
 		liga = new Liga(conexion);
+		//llamada al método leerLiga para administrar la liga de la DB
+		liga.leerLiga();
 		
 		setTitle("Administrador de Apuestas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -26,8 +26,8 @@ public class Liga implements Serializable {
 	public Liga(Connection conexion) {
 		
 		//Inicialización de los atributos
-		numEquipos=20;
-		nombreLiga="Liga BBVA";
+		numEquipos=24;
+		nombreLiga="Liga Española";
 		this.conexion=conexion;	
 		//equipos.ensureCapacity(numEquipos);
 		//for(int i=0;i<numEquipos;i++) {

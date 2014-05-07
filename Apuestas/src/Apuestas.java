@@ -34,7 +34,7 @@ public class Apuestas extends JFrame {
 	private Liga liga;
 
 	//Base de datos
-	Connection conexion = null; //maneja la conexión a la base de datos
+	private Connection conexion = null; //maneja la conexión a la base de datos
 	
 
 	public static void main(String[] args) {

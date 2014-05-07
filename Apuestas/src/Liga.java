@@ -44,7 +44,7 @@ public class Liga implements Serializable {
 		this.conexion=conexion;
 		//equipos.ensureCapacity(numEquipos);
 		for(int i=0;i<numEquipos;i++) {
-			equipos.add(new Equipo());
+			equipos.add(new Equipo(conexion));
 		}
 	}
 	
@@ -71,7 +71,7 @@ public class Liga implements Serializable {
 	
 	//Método para establecer un equipo en una posición determinada
 	public void setEquipo(Equipo equipo, int posicion) {
-		equipo=new Equipo();
+		equipo=new Equipo(conexion);
 		equipos.add(posicion, equipo);		
 	}
 	
@@ -83,7 +83,7 @@ public class Liga implements Serializable {
 	//Método para añadir un equipo
 	public void anyadirEquipo() {
 		numEquipos++;
-		equipos.add(new Equipo());
+		equipos.add(new Equipo(conexion));
 		
 	}
 	

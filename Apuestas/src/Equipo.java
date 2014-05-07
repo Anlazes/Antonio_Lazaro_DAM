@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.sql.Connection;
 
 public class Equipo implements Serializable {
 	
@@ -8,9 +9,10 @@ public class Equipo implements Serializable {
 	private int golesEnContra;
 	private int partidosGanados;
 	private int partidosPerdidos;
+	private Connection conexion = null; //maneja la conexión a la base de datos
 	
 	//Constructor de la clase Equipo
-	public Equipo(String nom, int golesF, int golesC, int partidosG, int partidosP) {	
+	public Equipo(Connection conexion, String nom, int golesF, int golesC, int partidosG, int partidosP) {	
 		
 		//Inicialización de atributos
 		nombreEquipo=nom;
@@ -21,7 +23,7 @@ public class Equipo implements Serializable {
 	}
 	
 	//Constructor de la clase equipo sin especificar atributos
-	public Equipo() {
+	public Equipo(Connection conexion) {
 		
 		//Inicialización de atributos
 		nombreEquipo="";

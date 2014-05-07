@@ -63,7 +63,9 @@ public class Apuestas extends JFrame {
 			sqlexcep.printStackTrace();		
 		} catch (ClassNotFoundException e) {			
 				e.printStackTrace(); } 
-	
+		
+		//Creación objeto Liga
+		liga = new Liga(conexion);
 		
 		setTitle("Administrador de Apuestas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,14 +89,15 @@ public class Apuestas extends JFrame {
 		textoNombreLiga.setBounds(10, 61, 255, 20);
 		contentPane.add(textoNombreLiga);
 		textoNombreLiga.setColumns(10);
+		textoNombreLiga.setText(liga.getNombreLiga());
 		
 		JButton btnAdministrar = new JButton("Administrar");
 		btnAdministrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				//Llamada al método para abrir la ventana Liga
-				abrirVentanaLiga(liga=new Liga(conexion, textoNombreLiga.getText())); 
-	
+				abrirVentanaLiga(); 			
+				
 			}
 		});
 		btnAdministrar.setBounds(10, 116, 115, 23);
@@ -110,7 +113,7 @@ public class Apuestas extends JFrame {
 	}
 	
 	//Método para abrir la ventana Liga
-		public void abrirVentanaLiga(Liga liga) {
+		public void abrirVentanaLiga() {
 			VentanaLiga frameLiga=new VentanaLiga(liga);
 			frameLiga.setVisible(true);
 			frameLiga.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
